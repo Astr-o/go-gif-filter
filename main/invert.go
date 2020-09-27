@@ -102,15 +102,15 @@ func Invert24BitGif(img *image.Paletted) error {
 // Invert24BitPixel invert a single pixel using conversion to RGBA
 func Invert24BitPixel(c color.Color) color.Color {
 
-	const COLOR_MAX_VAL uint8 = 255
+	const ColorMaxVal uint8 = 255
 
 	r, g, b, a := c.RGBA()
 
 	newC := color.RGBA{
-		R: COLOR_MAX_VAL - uint8(r),
-		G: COLOR_MAX_VAL - uint8(g),
-		B: COLOR_MAX_VAL - uint8(b),
-		A: uint8(a),
+		R: ColorMaxVal - uint8(r>>8),
+		G: ColorMaxVal - uint8(g>>8),
+		B: ColorMaxVal - uint8(b>>8),
+		A: uint8(a >> 8),
 	}
 
 	return newC
