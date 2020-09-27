@@ -19,12 +19,18 @@ var COLOR_WHITE = color.RGBA{
 	A: 255,
 }
 
+func colorToUInt8(c color.Color) (uint8, uint8, uint8, uint8) {
+	r, g, b, a := c.RGBA()
+
+	return uint8(r), uint8(g), uint8(b), uint8(a)
+}
+
 func TestInvert24BitPixelBlack(t *testing.T) {
 	expect := COLOR_BLACK
 	result := Invert24BitPixel(COLOR_WHITE)
 
 	if expect != result {
-		r, g, b, a := result.RGBA()
+		r, g, b, a := colorToUInt8(result)
 		t.Errorf("expected COLOR_BLACK got %d %d %d %d", r, g, b, a)
 	}
 
@@ -36,7 +42,7 @@ func TestInvert24BitPixelWhite(t *testing.T) {
 	result := Invert24BitPixel(COLOR_BLACK)
 
 	if expect != result {
-		r, g, b, a := result.RGBA()
+		r, g, b, a := colorToUInt8(result)
 		t.Errorf("expected COLOR_WHITE got %d %d %d %d", r, g, b, a)
 	}
 

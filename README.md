@@ -24,6 +24,21 @@ To run all unit tests from project root
 go test .\main\
 ```
 
+### Test Coverage 
+
+Run test coverage profile
+
+```bash
+go test .\main\ -coverprofile cover.out
+```
+
+Build HTML Report
+
+```bash
+go tool cover -html="cover.out" -o cover.html
+```
+
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
