@@ -9,6 +9,7 @@ import (
 	"os"
 )
 
+// ReadBinaryFileToMemory  return raw byte array of file in memory
 func ReadBinaryFileToMemory(filename string) ([]byte, error) {
 	file, err := os.Open(filename)
 
@@ -31,6 +32,7 @@ func ReadBinaryFileToMemory(filename string) ([]byte, error) {
 	return bytes, err
 }
 
+// Decode24BitGif return ptr to gif.GIF object decoded from file at filename
 func Decode24BitGif(filename string) (*gif.GIF, error) {
 
 	file, err := os.Open(filename)
@@ -52,6 +54,7 @@ func Decode24BitGif(filename string) (*gif.GIF, error) {
 
 }
 
+// Encode24BitGif encode and save content of img to file at filename
 func Encode24BitGif(filename string, img *gif.GIF) error {
 
 	file, err := os.Create(filename)
@@ -73,6 +76,7 @@ func Encode24BitGif(filename string, img *gif.GIF) error {
 
 }
 
+// Invert24BitGif apply a per pixel inverse filter
 func Invert24BitGif(img *image.Paletted) error {
 
 	bounds := img.Bounds()
@@ -95,6 +99,7 @@ func Invert24BitGif(img *image.Paletted) error {
 
 }
 
+// Invert24BitPixel invert a single pixel using conversion to RGBA
 func Invert24BitPixel(c color.Color) color.Color {
 
 	const COLOR_MAX_VAL uint8 = 255
