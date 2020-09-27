@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+
+	"./invert"
 )
 
 const testFile = "./images/parrots.gif"
@@ -12,7 +14,7 @@ const testOutput = "./images/parrots-inverted.gif"
 func main() {
 	fmt.Println("Hello, world.")
 
-	buff, readFileErr := ReadBinaryFileToMemory(testFile)
+	buff, readFileErr := invert.ReadBinaryFileToMemory(testFile)
 
 	if readFileErr != nil {
 		panic(readFileErr)
@@ -25,7 +27,7 @@ func main() {
 	fmt.Println(string(buff))
 
 	fmt.Printf("Decoding - %s \n", testFile)
-	data, decodeErr := Decode24BitGif(testFile)
+	data, decodeErr := invert.Decode24BitGif(testFile)
 
 	if decodeErr != nil {
 		panic(decodeErr)
@@ -33,14 +35,14 @@ func main() {
 
 	img := (*data).Image[0]
 
-	invertErr := Invert24BitGif(img)
+	invertErr := invert.Invert24BitGif(img)
 
 	if invertErr != nil {
 		panic(invertErr)
 	}
 
 	fmt.Printf("Encode - %s \n", testOutput)
-	encodingErr := Encode24BitGif(testOutput, data)
+	encodingErr := invert.Encode24BitGif(testOutput, data)
 
 	if encodingErr != nil {
 		panic(invertErr)

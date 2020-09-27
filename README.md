@@ -12,7 +12,7 @@ Simple toy project to learn go basics
 
 To run main from project root
 
-```bash
+```powershell
 go run .\main\
 ```
 
@@ -20,7 +20,7 @@ go run .\main\
 
 To run all unit tests from project root
 
-```bash
+```powershell
 go test .\main\
 ```
 
@@ -34,7 +34,7 @@ go test .\main\ -coverprofile cover.out
 
 Build HTML Report
 
-```bash
+```powershell
 go tool cover -html="cover.out" -o cover.html
 ```
 

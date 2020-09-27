@@ -1,4 +1,4 @@
-package main
+package invert
 
 import (
 	"bytes"
@@ -50,8 +50,8 @@ func TestInvert24BitPixelWhite(t *testing.T) {
 }
 
 func TestInvertTwiceIsOriginal(t *testing.T) {
-	const testFile = "../images/parrots.gif"
-	const testOutput = "../images/parrots-inverted-2x.gif"
+	const testFile = "../../images/parrots.gif"
+	const testOutput = "../../images/parrots-inverted-2x.gif"
 
 	expect, readExpectErr := ReadBinaryFileToMemory(testFile)
 
@@ -93,5 +93,38 @@ func TestInvertTwiceIsOriginal(t *testing.T) {
 
 	if bytes.Compare(expect, result) != 0 {
 		t.Errorf("Inverting image twich did not return original %s -> %s", testFile, testOutput)
+	}
+}
+
+func TestCopyIsIdentical(t *testing.T) {
+	const testFile = "../../images/parrots.gif"
+	const testOutput = "../../images/parrots-copy.gif"
+
+	expect, readExpectErr := ReadBinaryFileToMemory(testFile)
+
+	if readExpectErr != nil {
+		t.Error(readExpectErr)
+	}
+
+	data, decodeErr := Decode24BitGif(testFile)
+
+	if decodeErr != nil {
+		t.Error(decodeErr)
+	}
+
+	encodingErr := Encode24BitGif(testOutput, data)
+
+	if encodingErr != nil {
+		t.Error(encodingErr)
+	}
+
+	result, readResultErr := ReadBinaryFileToMemory(testOutput)
+
+	if readResultErr != nil {
+		t.Error(readResultErr)
+	}
+
+	if bytes.Compare(expect, result) != 0 {
+		t.Errorf("Encoding and decoding image did not return original %s -> %s", testFile, testOutput)
 	}
 }
